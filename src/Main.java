@@ -1,10 +1,13 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Main {
 
+    static private String acceptedChars = "+-<>[].,";
     static private byte[] tape = new byte[30000];
     static private char[] instrTape = new char[30000];
     static private int pointer = 0;
@@ -13,32 +16,22 @@ public class Main {
     static private int bracketCount = 1;
 
     public static void main(String[] args) {
-        File f = new File(args[1]);     //Creation of File Descriptor for input file
-        FileReader fr = null;   //Creation of File Reader object
-
+        String rawSource = "";
         try {
-            fr = new FileReader(f);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        BufferedReader br = new BufferedReader(fr);  //Creation of BufferedReader object
-        int c = 0;
-        int n = 0;
-        while (true)         //Read char by Char
-        {
-            try {
-                if (!((c = br.read()) != -1)) break;
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            char character = (char) c;          //converting integer to char
-
-
-            instrTape[n] = character;       //Display the Character
-            n++;
+            rawSource = new String(Files.readAllBytes(Paths.get(args[1])));
+        } catch (Exception e) {
+            e.printStackTrace(); //TODO Implement usage msg
         }
 
+        //tokenize raw input -- removes all comments and only leaves valid instructions
+        BFTokenizer sourceTokenizer = new BFTokenizer();
+        char[] tokenizedSource = sourceTokenizer.tokenize(rawSource);
+
+        //Temp shim to reach working state
+        System.arraycopy(tokenizedSource, 0, instrTape, 0, tokenizedSource.length);
+
+
+        //TODO: move to new class
         while (instrTape[instrPointer] != '\u0000') {
             switch (instrTape[instrPointer]) {
                 case '>':
@@ -121,6 +114,7 @@ public class Main {
                     }
                     break;
                 default:
+
                     break;
             }
         }
