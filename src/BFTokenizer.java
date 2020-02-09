@@ -1,8 +1,8 @@
 import javafx.util.Pair;
-
 import java.util.Stack;
 
 /**
+ * Checks user-provider source for any fatal errors and then tokenizes source.
  *
  * @author Carson Thompson
  */
@@ -13,7 +13,7 @@ public class BFTokenizer {
     public BFTokenizer(){
     }
 
-    //TODO add check for balanced brackets
+
     public char[] tokenize(String sourceCode) throws InvalidSourceException {
         int[] unbalancedBrackets = findUnbalancedBrackets(sourceCode);
 

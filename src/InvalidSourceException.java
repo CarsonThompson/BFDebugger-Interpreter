@@ -1,13 +1,23 @@
+/**
+ * Defines exception for problems found in user provided source, includes field for
+ * showing where exception occurs in source.
+ *
+ * @author Carson Thompson
+ */
 public class InvalidSourceException extends Exception {
-    private int[] errorIndexes;
+    private int[] exceptionIndices;
 
-    public InvalidSourceException(String message, int[] errorIndexes){
+    public InvalidSourceException(String message, int[] exceptionIndices){
         super(message);
-        this.errorIndexes = errorIndexes;
+        this.exceptionIndices = exceptionIndices;
     }
 
-    public int[] getErrorIndexes() {
-        return errorIndexes;
+    /**
+     *
+     * @return location(s) in source where exception occurs.
+     */
+    public int[] getExceptionIndexes() {
+        return exceptionIndices;
     }
-    
+
 }

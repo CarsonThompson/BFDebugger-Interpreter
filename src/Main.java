@@ -19,14 +19,13 @@ public class Main {
 
         //tokenize raw input -- removes all comments and only leaves valid instructions
         BFTokenizer sourceTokenizer = new BFTokenizer();
-
         char[] tokenizedSource = new char[0];
 
         try {
             tokenizedSource = sourceTokenizer.tokenize(rawSource);
         } catch (InvalidSourceException e) { //temp error message
             System.out.println("Error: " + e.getMessage() +
-                    " at character position(s) " + Arrays.toString(e.getErrorIndexes()));
+                    " at character position(s) " + Arrays.toString(e.getExceptionIndexes()));
             System.exit(2);
         }
 
