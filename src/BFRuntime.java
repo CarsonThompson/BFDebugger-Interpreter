@@ -138,11 +138,11 @@ public class BFRuntime {
         while (bracketStack > 0){
             curIndex--;
 
-            if(instrTape[curIndex] == ']')
+            if (instrTape[curIndex] == ']') {
                 bracketStack++;
-
-            if(instrTape[curIndex] == '[')
+            } else if (instrTape[curIndex] == '[') {
                 bracketStack--;
+            }
         }
 
         return curIndex;
