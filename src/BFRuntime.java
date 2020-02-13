@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.LinkedList;
 
 /**
  * Executes parsed and tokenize BF programs, will eventually have hooks for debugging.
@@ -21,9 +22,10 @@ import java.io.*;
 public class BFRuntime {
 
     private char[] instrTape;
-    private byte[] dataTape;
+    private byte[] dataTape; //TODO: Change to arrayList for expandability and safety
 
     private int instrPointer;
+
     private int dataPointer;
 
     private InputStreamReader usrIn;
@@ -115,11 +117,11 @@ public class BFRuntime {
         while (bracketStack > 0){
             curIndex++;
 
-            if(instrTape[curIndex] == '[')
+            if(instrTape[curIndex] == '[') {
                 bracketStack++;
-
-            if(instrTape[curIndex] == ']')
+            } else if(instrTape[curIndex] == ']') {
                 bracketStack--;
+            }
         }
 
         return curIndex;
@@ -146,5 +148,22 @@ public class BFRuntime {
         }
 
         return curIndex;
+    }
+
+    //== IMPROVE SAFETY BY MAKING IMMUTABLE ==\\
+    public byte[] getDataTape(){
+        return dataTape;
+    }
+    public char[] getInstrTape(){
+        return instrTape;
+    }
+    //=======================================\\
+
+    public int getInstrPointer() {
+        return instrPointer;
+    }
+
+    public int getDataPointer() {
+        return dataPointer;
     }
 }
